@@ -1,3 +1,6 @@
+mod error_handling_functions;
+use error_handling_functions::*;
+
 fn ownership_example() {
     let s1 = String::from("Crypto"); // Create a new String s1 containing "Crypto"
     let s2 = s1; // Move ownership of s1 to s2, s1 is no longer valid
@@ -17,7 +20,7 @@ fn immutable_borrowing_example() {
 }
 
 fn change(s: &mut String) {
-    s.push_str(", Crypto"); // Append ", Master" to the String s
+    s.push_str(", Master    https://linktr.ee/cryptomastertime"); // Append ", Master" to the String s
 }
 
 fn mutable_borrowing_example() {
@@ -91,4 +94,55 @@ fn main() {
     lifetimes_example(); // Demonstrate lifetime annotations
     explicit_lifetimes_example(); // Demonstrate explicit lifetime annotations
     lifetime_elision_example(); // Demonstrate lifetime elision
+
+
+    match file_handling() {
+        Ok(_) => println!("File handling successful"),
+        Err(err) => eprintln!("File handling error: {}", err),
+    }
+
+    match network_operation() {
+        Ok(_) => println!("Network operation successful"),
+        Err(err) => eprintln!("Network operation error: {}", err),
+    }
+
+    match parse_user_input("abc") {
+        Ok(num) => println!("Parsed user input: {}", num),
+        Err(err) => eprintln!("User input parsing error: {}", err),
+    }
+
+    match data_parsing("xyz") {
+        Ok(num) => println!("Parsed data: {}", num),
+        Err(err) => eprintln!("Data parsing error: {}", err),
+    }
+
+    match system_call() {
+        Ok(_) => println!("System call successful"),
+        Err(err) => eprintln!("System call error: {}", err),
+    }
+
+    match concurrent_operation() {
+        Ok(_) => println!("Concurrent operation successful"),
+        Err(err) => eprintln!("Concurrent operation error: {}", err),
+    }
+
+    match third_party_call() {
+        Ok(_) => println!("Third party call successful"),
+        Err(err) => eprintln!("Third party call error: {}", err),
+    }
+
+    match math_operation() {
+        Ok(_) => println!("Math operation successful, if change the divided data to zero, it can not finish compilement process."),
+        Err(err) => eprintln!("Math operation error: {}", err),
+    }
+
+    match memory_allocation() {
+        Ok(_) => println!("Memory allocation successful"),
+        Err(err) => eprintln!("Memory allocation error: {}", err),
+    }
+
+    match environment_configuration() {
+        Ok(_) => println!("Environment configuration successful"),
+        Err(err) => eprintln!("Environment configuration error: {}", err),
+    }
 }
