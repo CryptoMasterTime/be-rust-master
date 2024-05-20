@@ -3,6 +3,7 @@ use std::io::{self, Read, Write};
 use std::net::TcpStream;
 use std::num::ParseIntError;
 use std::str::FromStr;
+use std::panic;
 
 // File operation: Errors may occur when opening, reading, or writing files, such as file not found or insufficient permissions.
 pub fn file_handling() -> io::Result<()> {
@@ -58,9 +59,16 @@ pub fn math_operation() -> Result<(), &'static str> {
 
 // Memory allocation: Errors may occur when memory allocation fails, such as insufficient system memory when allocating memory.
 pub fn memory_allocation() -> Result<(), &'static str> {
-    let _vec: Vec<i32> = vec![1000000000; usize::MAX]; // Simulate memory allocation failure
-    Ok(())
+    let result = panic::catch_unwind(|| {
+        let _vec: Vec<i32> = vec![1000000000; usize::MAX]; // Simulate memory allocation failure
+    });
+
+    match result {
+        Ok(_) => Ok(()),
+        Err(_) => Err("Memory allocation failed"),
+    }
 }
+
 
 // Environment configuration: Errors may occur when reading or setting environment variables, configuration files, etc., such as file not found or incorrect format.
 pub fn environment_configuration() -> io::Result<()> {
