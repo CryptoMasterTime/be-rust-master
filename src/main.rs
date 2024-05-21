@@ -1,4 +1,7 @@
 mod error_handling_functions;
+mod multi_thread_processor;
+mod network_handler;
+mod shared_memory_concurrency;
 use error_handling_functions::*;
 
 fn ownership_example() {
@@ -145,4 +148,18 @@ fn main() {
         Ok(_) => println!("Environment configuration successful"),
         Err(err) => eprintln!("Environment configuration error: {}", err),
     }
+
+    println!("\nStarting single-threaded computation...");
+    let single_thread_result = multi_thread_processor::single_thread_computation();
+    println!("Single-threaded result: {}", single_thread_result);
+
+    println!("\nStarting multi-threaded computation...");
+    let multi_thread_result = multi_thread_processor::multi_thread_computation();
+    println!("Multi-threaded result: {}\n", multi_thread_result);
+
+    // network_handler::start_network_handler();
+    // loop{};
+
+    shared_memory_concurrency::demonstrate_shared_memory_concurrency();
+
 }
