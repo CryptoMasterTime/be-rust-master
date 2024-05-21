@@ -13,7 +13,8 @@ pub fn single_thread_computation() -> u64 {
     let sum_of_squares: u64 = data.iter().map(|&x| x * x).sum();
     let duration = start_time.elapsed();
 
-    println!("Single-threaded computation took: {:?}", duration);
+    // println!("Single-threaded computation took: {:?}", duration);
+    println!("Single-threaded computation took: \x1b[31m{:?}\x1b[0m", duration);
     sum_of_squares
 }
 
@@ -53,7 +54,9 @@ pub fn multi_thread_computation() -> u64 {
     }
 
     let duration = start_time.elapsed();
-    println!("Multi-threaded computation took: {:?}", duration);
+    // println!("Multi-threaded computation took: {:?}", duration);
+    println!("Multi-threaded computation took: \x1b[31m{:?}\x1b[0m", duration);
+
 
     let result = *result.lock().unwrap();
     result
