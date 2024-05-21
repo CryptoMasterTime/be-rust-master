@@ -2,6 +2,7 @@ mod error_handling_functions;
 mod multi_thread_processor;
 mod network_handler;
 mod shared_memory_concurrency;
+mod async_io_computation;
 use error_handling_functions::*;
 
 fn ownership_example() {
@@ -89,7 +90,8 @@ fn lifetime_elision_example() {
     println!("The first word is {}", word); // Print the first word
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     ownership_example(); // Demonstrate ownership concepts
     immutable_borrowing_example(); // Demonstrate immutable borrowing
     mutable_borrowing_example(); // Demonstrate mutable borrowing
@@ -161,5 +163,7 @@ fn main() {
     // loop{};
 
     shared_memory_concurrency::demonstrate_shared_memory_concurrency();
+
+    async_io_computation::async_example().await;
 
 }
