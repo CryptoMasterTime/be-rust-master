@@ -1,15 +1,17 @@
+mod async_io_computation;
 mod error_handling_functions;
 mod multi_thread_processor;
 mod network_handler;
 mod shared_memory_concurrency;
-mod async_io_computation;
+mod macros_generics_traits_closures;
 use error_handling_functions::*;
+use macros_generics_traits_closures::{add, DisplayMessage, Message, calculate_product};
 
 fn ownership_example() {
     let s1 = String::from("Crypto"); // Create a new String s1 containing "Crypto"
     let s2 = s1; // Move ownership of s1 to s2, s1 is no longer valid
     println!("{}", s2); // Print the content of s2, which is "Crypto"
-    // println!("{}", s1); // Attempting to use s1 here would result in a compile-time error
+                        // println!("{}", s1); // Attempting to use s1 here would result in a compile-time error
 }
 
 fn calculate_length(s: &String) -> usize {
@@ -20,7 +22,7 @@ fn immutable_borrowing_example() {
     let s = String::from("Crypto"); // Create a new String s containing "Crypto"
     let len = calculate_length(&s); // Pass a reference to s to calculate its length
     println!("The length of '{}' is {}.", s, len); // Print the content of s and its length
-    // s is still valid here because only an immutable reference to it is used
+                                                   // s is still valid here because only an immutable reference to it is used
 }
 
 fn change(s: &mut String) {
@@ -76,8 +78,10 @@ fn explicit_lifetimes_example() {
 
 fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes(); // Convert the string to bytes
-    for (i, &item) in bytes.iter().enumerate() { // Iterate through the bytes
-        if item == b' ' { // If a space is encountered
+    for (i, &item) in bytes.iter().enumerate() {
+        // Iterate through the bytes
+        if item == b' ' {
+            // If a space is encountered
             return &s[0..i]; // Return the substring up to the space
         }
     }
@@ -99,7 +103,6 @@ async fn main() {
     lifetimes_example(); // Demonstrate lifetime annotations
     explicit_lifetimes_example(); // Demonstrate explicit lifetime annotations
     lifetime_elision_example(); // Demonstrate lifetime elision
-
 
     match file_handling() {
         Ok(_) => println!("File handling successful"),
@@ -166,4 +169,18 @@ async fn main() {
 
     async_io_computation::async_example().await;
 
+    // Call the macro
+    print_message!("Hello, Rust macros!");
+
+    // Call the generic function
+    let sum = add(3, 5);
+    println!("Sum: {}", sum);
+
+    // Call the trait method
+    let msg = Message { content: String::from("Hello, Rust traits!") };
+    msg.display();
+
+    // Call the function that uses a closure
+    let product = calculate_product(4, 6);
+    println!("Product: {}", product);
 }
