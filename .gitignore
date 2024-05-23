@@ -1,0 +1,11 @@
+# Ignore all compiled files
+target/
+
+# Ignore all .DS_Store files (for macOS)
+.DS_Store
+
+# Ignore all .log files
+*.log
+
+# Ignore all .swp files (for Vim)
+*.swp
