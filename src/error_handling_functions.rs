@@ -52,7 +52,7 @@ pub fn third_party_call() -> Result<(), &'static str> {
 
 // Mathematical operation: Errors may occur during mathematical operations, such as division by zero or overflow errors.
 pub fn math_operation() -> Result<(), &'static str> {
-    let result = 10 /2; // Division by zero error
+    let result = 10 / 2; // Division by zero error
     println!("Result: {}", result);
     Ok(())
 }

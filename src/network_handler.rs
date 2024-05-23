@@ -1,7 +1,7 @@
+use std::io::{BufRead, BufReader};
 use std::net::{TcpListener, TcpStream};
-use std::thread;
 use std::sync::mpsc;
-use std::io::{BufReader, BufRead};
+use std::thread;
 
 pub fn start_network_handler() {
     // Create an mpsc channel for sending data from the network thread to the processing thread

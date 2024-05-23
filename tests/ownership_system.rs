@@ -2,7 +2,7 @@ fn ownership_example() {
     let s1 = String::from("Crypto"); // Create a new String s1 containing "Crypto"
     let s2 = s1; // Move ownership of s1 to s2, s1 is no longer valid
     println!("{}", s2); // Print the content of s2, which is "Crypto"
-    // println!("{}", s1); // Attempting to use s1 here would result in a compile-time error
+                        // println!("{}", s1); // Attempting to use s1 here would result in a compile-time error
 }
 
 fn calculate_length(s: &String) -> usize {
@@ -13,7 +13,7 @@ fn immutable_borrowing_example() {
     let s = String::from("Crypto"); // Create a new String s containing "Crypto"
     let len = calculate_length(&s); // Pass a reference to s to calculate its length
     println!("The length of '{}' is {}.", s, len); // Print the content of s and its length
-    // s is still valid here because only an immutable reference to it is used
+                                                   // s is still valid here because only an immutable reference to it is used
 }
 
 fn change(s: &mut String) {
@@ -69,8 +69,10 @@ fn explicit_lifetimes_example() {
 
 fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes(); // Convert the string to bytes
-    for (i, &item) in bytes.iter().enumerate() { // Iterate through the bytes
-        if item == b' ' { // If a space is encountered
+    for (i, &item) in bytes.iter().enumerate() {
+        // Iterate through the bytes
+        if item == b' ' {
+            // If a space is encountered
             return &s[0..i]; // Return the substring up to the space
         }
     }
@@ -82,7 +84,6 @@ fn lifetime_elision_example() {
     let word = first_word(&my_string); // Get the first word of my_string
     println!("The first word is {}", word); // Print the first word
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -118,7 +119,7 @@ mod tests {
             assert_eq!(r1, "hello");
             assert_eq!(r2, "hello");
         } // r1 and r2 go out of scope here
-    
+
         let r3 = &mut s; // mutable borrow
         r3.push_str(", world");
         assert_eq!(r3, "hello, world");
@@ -147,5 +148,5 @@ mod tests {
         let my_string = String::from("hello world");
         let word = first_word(&my_string);
         assert_eq!(word, "hello");
-    }    
+    }
 }
