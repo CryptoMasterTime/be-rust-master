@@ -1,5 +1,5 @@
 # Ignore all compiled files
-target/
+target/*
 
 # Ignore all .DS_Store files (for macOS)
 .DS_Store
